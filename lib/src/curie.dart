@@ -1,4 +1,4 @@
-part of wamp;
+part of wamp2;
 
 class CurieCodec {
   Map<String, String> map = new Map();

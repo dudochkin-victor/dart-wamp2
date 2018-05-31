@@ -1,15 +1,15 @@
 import 'dart:html';
-import 'package:wamp/wamp_client.dart';
+import 'package:wamp2/wamp_client.dart';
 
 class ChatClient extends WampClient {
   ChatClient(socket) : super(socket);
 
   onWelcome() {
-    subscribe('chat:room');
+    subscribe('chat:room', onEvent);
   }
 
-  onEvent(topicUri, event) {
-    querySelector('#history').appendHtml('${event}<br />');
+  onEvent(subId, pubId, details, args, kwArgs) {
+    querySelector('#history').appendHtml('${args}<br /> ${args}<br /> ');
   }
 }
 

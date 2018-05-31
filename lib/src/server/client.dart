@@ -1,4 +1,4 @@
-part of wamp.server;
+part of wamp2.server;
 
 /// Represents a client connection.
 class Client {
@@ -9,11 +9,11 @@ class Client {
   Map<String, String> prefixes = new Map();
 
   Client(this.socket, this.sessionId) {
-    var rnd = new Random();
+//    var rnd = new Random();
   }
 
   void send(msg) {
-    socket.add(JSON.encode(msg));
+    socket.add(jsonEncode(msg));
   }
 
   void welcome([serverId = "srv"]) {
@@ -21,11 +21,11 @@ class Client {
   }
 
   void callResult(String callId, result) {
-    send([MessageType.CALL_RESULT, callId, result]);
+//    send([MessageType.CALL_RESULT, callId, result]);
   }
 
   void callError(String callId, String errorUri, String errorDescription) {
-    send([MessageType.CALL_ERROR, callId, errorUri, errorDescription]);
+//    send([MessageType.CALL_ERROR, callId, errorUri, errorDescription]);
   }
 
   void event(String topicId, event) {

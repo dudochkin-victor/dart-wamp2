@@ -1,11 +1,11 @@
-library wamp.client;
+library wamp2.client;
 
 import 'dart:html';
-import 'dart:convert' show JSON;
 import 'dart:math';
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:wamp/wamp.dart';
+import 'package:wamp2/wamp.dart';
 
 // TODO: add reconnect functionality.
 
@@ -14,11 +14,11 @@ class WampClient {
 
   String sessionId;
   Map<String, String> prefixes = new Map();
-  Map<String, Completer> callCompleters = new Map();
+  Map<int, Completer> callCompleters = new Map();
   Map<String, Function> subscriptions = new Map();
 
   WampClient(this._socket) {
-    _socket.onMessage.listen((e) => onMessage(JSON.decode(e.data)));
+    _socket.onMessage.listen((e) => onMessage(jsonDecode(e.data)));
   }
 
   void onMessage(List msg) {
@@ -83,7 +83,7 @@ class WampClient {
   }
 
   void send(msg) {
-    _socket.send(JSON.encode(msg));
+    _socket.send(jsonEncode(msg));
   }
 
   void onWelcome() {
@@ -98,7 +98,7 @@ class WampClient {
   // Sets a CURIE prefix.
   void prefix(String prefix, String uri) {
     prefixes[prefix] = uri;
-    send([MessageType.PREFIX, prefix, uri]);
+//    send([MessageType.PREFIX, prefix, uri]);
   }
 
   // Calls remote procedure.
@@ -140,6 +140,6 @@ class WampClient {
   }
 
   int generateSessionId() {
-    return new Random().nextInt(99999999); // TODO: use some kind of hash.
+    return new Random().nextInt(99999999);
   }
 }

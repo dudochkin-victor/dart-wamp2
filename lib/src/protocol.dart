@@ -1,4 +1,4 @@
-part of wamp;
+part of wamp2;
 
 const int PROTOCOL_VERSION = 2;
 

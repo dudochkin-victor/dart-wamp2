@@ -1,11 +1,12 @@
-library wamp.server;
+library wamp2.server;
 
 import 'dart:io';
-import 'dart:convert' show JSON;
-import 'dart:math';
+import 'dart:convert';
+//import 'dart:convert' show json;
+//import 'dart:math';
 import 'dart:async';
 
-import 'package:wamp/wamp.dart';
+import 'package:wamp2/wamp.dart';
 import 'package:uuid/uuid.dart';
 
 part 'src/server/client.dart';
@@ -17,12 +18,11 @@ class WampHandler implements StreamConsumer<WebSocket> {
   CurieCodec curie = new CurieCodec();
 
   Future addStream(Stream<WebSocket> stream) {
-//    stream.listen((socket) {
-//      handle(socket);
-      handle(stream);
-//    }, onDone: () {
-//      print('Client disconnected');
-//    });
+    stream.listen((socket) {
+      handle(socket);
+    }, onDone: () {
+      print('Client disconnected');
+    });
     return new Future.value(stream); // TODO: what to return here?
   }
 
@@ -39,14 +39,14 @@ class WampHandler implements StreamConsumer<WebSocket> {
       var msg;
 
       try {
-        msg = JSON.decode(data);
+        msg = jsonDecode(data);
 
         print("MESSAGE " + data);
 
         switch(msg[0]) {
-          case MessageType.PREFIX:
-            c.prefixes[msg[1]] = msg[2];
-            break;
+//          case MessageType.PREFIX:
+//            c.prefixes[msg[1]] = msg[2];
+//            break;
 
           case MessageType.CALL:
             onCall(c, msg[1], msg[2], msg[3]);

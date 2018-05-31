@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:wamp/wamp_server.dart';
+import 'package:wamp2/wamp_server.dart';
 
 class ChatHandler extends WampHandler {
   void onCall(c, callId, uri, arg) {
