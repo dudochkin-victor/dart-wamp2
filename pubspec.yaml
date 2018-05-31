@@ -1,6 +1,10 @@
 name: wamp2
 version: 0.1.0
-author: Victor Dudochkin <dudochkin.victor@gmail.com>
+
+authors: 
+- Dudochkin Victor <dudochkin.victor@gmail.com>
+- George Moschovitis <george.moschovitis@gmail.com>
+
 description: An implementation of the WAMP v2 (http://wamp.ws) protocol for Dart 2.
 homepage: https://github.com/ohyo-io/dart-wamp2
 
